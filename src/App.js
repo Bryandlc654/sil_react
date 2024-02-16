@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Sidebar from './components/Sidebard/Sidebard';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLoginSuccess = () => {
+    // Función para manejar el éxito de la autenticación y cambiar el estado
+    setIsAuthenticated(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+        {isAuthenticated ? <Sidebar /> : <Login onLoginSuccess={handleLoginSuccess} />}
+        <div className='vw100'>
+          <Routes>
+            {/* Protege la ruta de inicio para que solo se muestre si el usuario está autenticado */}
+            {isAuthenticated && <Route path="/home" element={<Home />} />}
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
