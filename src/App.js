@@ -8,7 +8,6 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLoginSuccess = () => {
-    // Función para manejar el éxito de la autenticación y cambiar el estado
     setIsAuthenticated(true);
   };
 
