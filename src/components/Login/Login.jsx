@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css'
 import Logo from '../../assets/logo.png';
+import API_URL from '../../api/api';
 
-const Login = () => {
+const Login = ({ onLoginSuccess }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-  
-  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://sil-api.nextboostperu.com/api/auth/login', {
+      const response = await fetch(`${API_URL}auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,17 +32,18 @@ const Login = () => {
       });
 
       if (response.ok) {
-        // Usuario autenticado correctamente
-        console.log('Usuario autenticado correctamente');
+        const data = await response.json();
+        localStorage.setItem('token', data.token); // Guarda el token en el almacenamiento local
+        onLoginSuccess(); // Llama a la función proporcionada para manejar el éxito del inicio de sesión
         navigate('/home'); // Redirige al usuario a la ruta deseada
       } else {
-        // Muestra un mensaje de error
         console.error('Credenciales incorrectas');
       }
     } catch (error) {
       console.error('Error al autenticar', error);
     }
   };
+
 
   return (
     <>

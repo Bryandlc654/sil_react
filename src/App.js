@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebard/Sidebard';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Sidebar from './components/Sidebard/Sidebard.jsx';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  useEffect(() => {
+    // Verifica si el token existe en el almacenamiento local al cargar la aplicación
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const handleLoginSuccess = () => {
-    // Función para manejar el éxito de la autenticación y cambiar el estado
     setIsAuthenticated(true);
   };
 
@@ -19,7 +26,10 @@ function App() {
         <div className='vw100'>
           <Routes>
             {/* Protege la ruta de inicio para que solo se muestre si el usuario está autenticado */}
-            {isAuthenticated && <Route path="/home" element={<Home />} />}
+            <Route
+              path="/home"
+              element={isAuthenticated ? <Home /> : <Navigate to="/home" />}
+            />
           </Routes>
         </div>
       </div>

@@ -1,9 +1,28 @@
 import React from 'react'
 import Logo from '../../assets/logo.png'
 import { Link } from 'react-router-dom';
-
+import API_URL from '../../api/api';
 
 const Sidebard = () => {
+    const logout = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          if (token) {
+            await fetch(`${API_URL}auth/logout`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+            });
+          }
+          localStorage.removeItem('token');
+          window.location.href = '/login';
+        } catch (error) {
+          console.error('Error al cerrar sesión:', error);
+        }
+      };
+    
     return (
         <>
             <nav
@@ -101,7 +120,7 @@ const Sidebard = () => {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">
+                            <a className="nav-link" onClick={logout} href="#">
                                     <i className="bi bi-box-arrow-left" /> Cerrar Sesión
                                 </a>
                             </li>
