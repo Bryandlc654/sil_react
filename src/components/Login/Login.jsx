@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css'
 import Logo from '../../assets/logo.png';
@@ -33,9 +33,10 @@ const Login = ({ onLoginSuccess }) => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token); // Guarda el token en el almacenamiento local
-        onLoginSuccess(); // Llama a la función proporcionada para manejar el éxito del inicio de sesión
-        navigate('/home'); // Redirige al usuario a la ruta deseada
+        localStorage.setItem('token',data.access_token);
+        console.log(data.access_token) 
+        onLoginSuccess();
+        navigate('/home'); 
       } else {
         console.error('Credenciales incorrectas');
       }
