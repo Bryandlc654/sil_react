@@ -6,7 +6,7 @@ const RegisterUser = () => {
         <h2>Registrar Usuario</h2>
         <hr />
         <br />
-        <form className=" row g-3">
+        <form className="row g-3">
           <div className="col-md-2">
             <label htmlFor="inputDni" className="form-label">
               DNI
@@ -114,7 +114,6 @@ const RegisterUser = () => {
           </div>
         </form>
       </div>
-
     </>
   )
 }

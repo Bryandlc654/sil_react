@@ -63,10 +63,42 @@ const Sidebard = () => {
                       <Link className="nav-link" aria-current="page" to="/register-user">
                         Registrar Usuario
                       </Link>
+                      <Link className="nav-link" aria-current="page" to="/list-user">
+                        Lista de Usuarios
+                      </Link>
                     </div>
                   </div>
                 </div>
-
+              </div>
+            </li>
+            <li>
+              <div className="accordion accordion-flush" id="accordionFlushCourse">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#course-collapseOne"
+                      aria-expanded="false"
+                      aria-controls="course-collapseOne"
+                    >
+                      <i className="bi bi-bookmark me-2"></i>
+                      Cursos
+                    </button>
+                  </h2>
+                  <div
+                    id="course-collapseOne"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushCourse"
+                  >
+                    <div className="accordion-body">
+                      <Link className="nav-link" aria-current="page" to="/create-course">
+                        Registrar Curso
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>

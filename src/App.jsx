@@ -10,6 +10,8 @@ import Sidebar from "./components/Sidebard/Sidebard.jsx";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import RegisterUser from "./components/RegisterUser/Register-user.jsx";
+import ListUser from "./components/ListUser/ListUser.jsx";
+import CreateCourse from "./components/CreateCourse/CreateCourse.jsx";
 
 
 function App() {
@@ -48,6 +50,14 @@ function App() {
               <Route
                 path="/register-user"
                 element={isAuthenticated ? <RegisterUser /> : <Navigate to="/register-user" />}
+              />
+              <Route
+                path="/list-user"
+                element={isAuthenticated ? <ListUser /> : <Navigate to="/list-user" />}
+              />
+              <Route
+                path="/create-course"
+                element={isAuthenticated ? <CreateCourse /> : <Navigate to="/create-course" />}
               />
             </Routes>
           </div>

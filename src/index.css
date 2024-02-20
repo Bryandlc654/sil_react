@@ -1,4 +1,14 @@
-
 /* Bootstrap Icons */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
 
+
+
+.accordion-button:not(.collapsed) {
+    color:#fff;
+    background-color: #0f234e;
+    box-shadow: none;
+}
+
+.modal-form{
+    height: 22rem;
+}
