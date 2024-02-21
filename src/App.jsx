@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
+import Header from "./components/Header/Header.jsx"
 import Sidebar from "./components/Sidebard/Sidebard.jsx";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
+import RegisterUser from "./components/RegisterUser/Register-user.jsx";
+import ListUser from "./components/ListUser/ListUser.jsx";
+import CreateCourse from "./components/CreateCourse/CreateCourse.jsx";
 
 
 function App() {
@@ -27,20 +31,36 @@ function App() {
 
   return (
     <Router>
-      <div className="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
-        {isAuthenticated ? (
-          <Sidebar />
-        ) : (
-          <Login onLoginSuccess={handleLoginSuccess} />
-        )}
-        <div className="vw100">
-          <Routes>
-            {/* Protege la ruta de inicio para que solo se muestre si el usuario está autenticado */}
-            <Route
-              path="/home"
-              element={isAuthenticated ? <Home /> : <Navigate to="/home" />}
-            />
-          </Routes>
+      <div className="container-fluid">
+        <div className="row">
+          {isAuthenticated ? (
+            <>
+              <Header />
+              <Sidebar />
+            </>
+          ) : (
+            <Login onLoginSuccess={handleLoginSuccess} />
+          )}
+          <div>
+            <Routes>
+              <Route
+                path="/home"
+                element={isAuthenticated ? <Home /> : <Navigate to="/home" />}
+              />
+              <Route
+                path="/register-user"
+                element={isAuthenticated ? <RegisterUser /> : <Navigate to="/register-user" />}
+              />
+              <Route
+                path="/list-user"
+                element={isAuthenticated ? <ListUser /> : <Navigate to="/list-user" />}
+              />
+              <Route
+                path="/create-course"
+                element={isAuthenticated ? <CreateCourse /> : <Navigate to="/create-course" />}
+              />
+            </Routes>
+          </div>
         </div>
       </div>
     </Router>

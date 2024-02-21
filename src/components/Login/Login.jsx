@@ -1,49 +1,23 @@
-import  { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './login.css'
-import Logo from '../../assets/logo.png';
-import API_URL from '../../api/api';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./login.css";
+import Logo from "../../assets/logo.png";
+import { Eye, EyeClose } from "../svg/Eye";
+import { useForm, useLogin } from "./function";
 
 const Login = ({ onLoginSuccess }) => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+  const { formData, handleInputChange } = useForm({
+    email: "",
+    password: "",
   });
+  const { handleLogin, error } = useLogin(formData, onLoginSuccess, navigate);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(`${API_URL}auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('token',data.access_token);
-        console.log(data.access_token) 
-        onLoginSuccess();
-        navigate('/home'); 
-      } else {
-        console.error('Credenciales incorrectas');
-      }
-    } catch (error) {
-      console.error('Error al autenticar', error);
-    }
-  };
 
 
   return (
@@ -66,15 +40,22 @@ const Login = ({ onLoginSuccess }) => {
                 value={formData.email}
                 onChange={handleInputChange}
               />
-              <input
-                type="password"
-                className="form-field animation a4"
-                placeholder="Contraseña"
-                required
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-              />
+              <div className="content-password animation a4">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="form-field animation a4"
+                  placeholder="Contraseña"
+                  required
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  style={{ width: "100%" }}
+                />
+                <span className="eyes_close" onClick={togglePasswordVisibility}>
+                  {showPassword ? <EyeClose /> : <Eye />}
+                </span>
+              </div>
+              {error && <span className="error-message">{error}</span>} {/* Renderizar el mensaje de error si existe */}
               <p className="animation a5 reset__password">
                 <a href="#">¿Olvidaste tu contraseña?</a>
               </p>

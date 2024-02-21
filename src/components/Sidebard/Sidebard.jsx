@@ -1,135 +1,111 @@
-import React from 'react'
-import Logo from '../../assets/logo.png'
-import { Link } from 'react-router-dom';
+/*
 import API_URL from '../../api/api';
+ */
+import { Link } from 'react-router-dom';
+import './sidebard.css'
 
 const Sidebard = () => {
-    const logout = async () => {
-        try {
-          const token = localStorage.getItem('token');
-          if (token) {
-            await fetch(`${API_URL}auth/logout`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-              },
-            });
-          }
-          localStorage.removeItem('token');
-          window.location.href = '/login';
-        } catch (error) {
-          console.error('Error al cerrar sesión:', error);
+  /* const logout = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (token) {
+          await fetch(`${API_URL}auth/logout`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          });
         }
-      };
-    
-    return (
-        <>
-            <nav
-                className="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg"
-                id="navbarVertical"
-            >
-                <div className="container-fluid">
-                    {/* Toggler */}
-                    <button
-                        className="navbar-toggler ms-n2"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#sidebarCollapse"
-                        aria-controls="sidebarCollapse"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon" />
-                    </button>
-                    {/* Brand */}
-                    <a className="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
-                        <img
-                            src={Logo}
-                            alt="San Igancio de Loyola"
-                        />
-                    </a>
-                    {/* User menu (mobile) */}
-                    <div className="navbar-user d-lg-none">
-                        {/* Dropdown */}
-                        <div className="dropdown">
-                            {/* Toggle */}
-                            <a
-                                href="#"
-                                id="sidebarAvatar"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <div className="avatar-parent-child">
-                                    <img
-                                        alt="Image Placeholder"
-                                        src="https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                                        className="avatar avatar- rounded-circle"
-                                    />
-                                    <span className="avatar-child avatar-badge bg-success" />
-                                </div>
-                            </a>
-                            {/* Menu */}
-                            <div
-                                className="dropdown-menu dropdown-menu-end"
-                                aria-labelledby="sidebarAvatar"
-                            >
-                                <a href="#" className="dropdown-item">
-                                    Profile
-                                </a>
-                                <a href="#" className="dropdown-item">
-                                    Settings
-                                </a>
-                                <a href="#" className="dropdown-item">
-                                    Billing
-                                </a>
-                                <hr className="dropdown-divider" />
-                                <a href="#" className="dropdown-item">
-                                    Logout
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    {/* Collapse */}
-                    <div className="collapse navbar-collapse" id="sidebarCollapse">
-                        {/* Navigation */}
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/home">
-                                    <i className="bi bi-house" /> Dashboard
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <i className="bi bi-people" /> Users
-                                </a>
-                            </li>
-                        </ul>
-                        {/* Divider */}
-                        <hr className="navbar-divider my-5 opacity-20" />
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+      }
+    }; */
 
-                        {/* Push content down */}
-                        <div className="mt-auto" />
-                        {/* User (md) */}
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <i className="bi bi-person-square" /> Mi perfil
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                            <a className="nav-link" onClick={logout} href="#">
-                                    <i className="bi bi-box-arrow-left" /> Cerrar Sesión
-                                </a>
-                            </li>
-                        </ul>
+  return (
+    <>
+      <nav
+        id="sidebarMenu"
+        className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+      >
+        <div className="position-sticky pt-3 sidebar-sticky">
+          <ul className="nav flex-column">
+            <li className="nav-item">
+              <a className="nav-link" aria-current="page" href="#">
+                <i className="bi bi-bar-chart me-2"></i>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <div className="accordion accordion-flush" id="accordionFlushExample">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseOne"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseOne"
+                    >
+                      <i className="bi bi-people me-2"></i>
+                      Usuarios
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseOne"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample"
+                  >
+                    <div className="accordion-body">
+                      <Link className="nav-link" aria-current="page" to="/register-user">
+                        Registrar Usuario
+                      </Link>
+                      <Link className="nav-link" aria-current="page" to="/list-user">
+                        Lista de Usuarios
+                      </Link>
                     </div>
+                  </div>
                 </div>
-            </nav>
-        </>
-    )
+              </div>
+            </li>
+            <li>
+              <div className="accordion accordion-flush" id="accordionFlushCourse">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#course-collapseOne"
+                      aria-expanded="false"
+                      aria-controls="course-collapseOne"
+                    >
+                      <i className="bi bi-bookmark me-2"></i>
+                      Cursos
+                    </button>
+                  </h2>
+                  <div
+                    id="course-collapseOne"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushCourse"
+                  >
+                    <div className="accordion-body">
+                      <Link className="nav-link" aria-current="page" to="/create-course">
+                        Registrar Curso
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </>
+  )
 }
 
 export default Sidebard
