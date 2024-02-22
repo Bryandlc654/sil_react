@@ -1,28 +1,28 @@
-/*
+
 import API_URL from '../../api/api';
- */
-import { Link } from 'react-router-dom';
-import './sidebard.css'
+
+import { Link } from "react-router-dom";
+import "./sidebard.css";
 
 const Sidebard = () => {
-  /* const logout = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (token) {
-          await fetch(`${API_URL}auth/logout`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        }
-        localStorage.removeItem('token');
-        window.location.href = '/login';
-      } catch (error) {
-        console.error('Error al cerrar sesión:', error);
+  const logout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        await fetch(`${API_URL}auth/logout`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
       }
-    }; */
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
 
   return (
     <>
@@ -39,7 +39,10 @@ const Sidebard = () => {
               </a>
             </li>
             <li>
-              <div className="accordion accordion-flush" id="accordionFlushExample">
+              <div
+                className="accordion accordion-flush"
+                id="accordionFlushExample"
+              >
                 <div className="accordion-item">
                   <h2 className="accordion-header">
                     <button
@@ -60,10 +63,18 @@ const Sidebard = () => {
                     data-bs-parent="#accordionFlushExample"
                   >
                     <div className="accordion-body">
-                      <Link className="nav-link" aria-current="page" to="/register-user">
+                      <Link
+                        className="nav-link"
+                        aria-current="page"
+                        to="/register-user"
+                      >
                         Registrar Usuario
                       </Link>
-                      <Link className="nav-link" aria-current="page" to="/list-user">
+                      <Link
+                        className="nav-link"
+                        aria-current="page"
+                        to="/list-user"
+                      >
                         Lista de Usuarios
                       </Link>
                     </div>
@@ -72,7 +83,10 @@ const Sidebard = () => {
               </div>
             </li>
             <li>
-              <div className="accordion accordion-flush" id="accordionFlushCourse">
+              <div
+                className="accordion accordion-flush"
+                id="accordionFlushCourse"
+              >
                 <div className="accordion-item">
                   <h2 className="accordion-header">
                     <button
@@ -93,7 +107,11 @@ const Sidebard = () => {
                     data-bs-parent="#accordionFlushCourse"
                   >
                     <div className="accordion-body">
-                      <Link className="nav-link" aria-current="page" to="/create-course">
+                      <Link
+                        className="nav-link"
+                        aria-current="page"
+                        to="/create-course"
+                      >
                         Registrar Curso
                       </Link>
                     </div>
@@ -101,11 +119,16 @@ const Sidebard = () => {
                 </div>
               </div>
             </li>
+            <li>
+              <button className="nav-link" onClick={logout}>
+                Cerrar Sesión
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
     </>
-  )
-}
+  );
+};
 
-export default Sidebard
+export default Sidebard;

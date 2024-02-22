@@ -1,6 +1,13 @@
+import { useState, useEffect }from "react";
+
 import FunctionList from "./function/FunctionList";
 const ListUser = () => {
-  const { userallData, openModal } = FunctionList();
+  const { userallData, openModal, selectedUser } = FunctionList();
+  const [modalUserData, setModalUserData] = useState(null);
+
+  useEffect(() => {
+    setModalUserData(selectedUser);
+  }, [selectedUser]);
 
   return (
     <>
@@ -39,7 +46,9 @@ const ListUser = () => {
                         type="button"
                         title="Ver Usuario"
                         className="btn btn-success"
-                        onClick={() => openModal("viewModal")}
+                        onClick={() => {
+                          openModal("viewModal", user); // Pasar el usuario seleccionado
+                        }}
                       >
                         <i className="bi bi-eye"></i>
                       </button>
@@ -100,6 +109,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputApellido"
+                          value={modalUserData?.Usuario_apellidos || ""}
                           disabled
                         />
                       </div>
@@ -112,6 +122,7 @@ const ListUser = () => {
                           className="form-control"
                           id="inputNombre"
                           disabled
+                          value={modalUserData?.name || ""}
                         />
                       </div>
                       <div className="mb-3">
@@ -122,6 +133,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputDni"
+                          value={modalUserData?.Usuario_dni || ""}
                           disabled
                         />
                       </div>
@@ -133,6 +145,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputFechaNac"
+                          value={modalUserData?.Usuario_fnacimiento  || ""}
                           disabled
                         />
                       </div>
@@ -145,6 +158,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputSexo"
+                          value={modalUserData?.Usuario_sexo  || ""}
                           disabled
                         />
                       </div>
@@ -156,6 +170,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputDireccion"
+                          value={modalUserData?.Usuario_direccion  || ""}
                           disabled
                         />
                       </div>
@@ -167,6 +182,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputDistrito"
+                          value={modalUserData?.Usuario_distrito   || ""}
                           disabled
                         />
                       </div>
@@ -178,6 +194,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputProvincia"
+                          value={modalUserData?.Usuario_provincia    || ""}
                           disabled
                         />
                       </div>
@@ -192,6 +209,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputDepartamento"
+                          value={modalUserData?.Usuario_departamento || ""}
                           disabled
                         />
                       </div>
@@ -203,6 +221,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputCelular"
+                          value={modalUserData?.Usuario_celular || ""}
                           disabled
                         />
                       </div>
@@ -214,6 +233,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputStatus"
+                          value={modalUserData?.Usuario_status|| ""}
                           disabled
                         />
                       </div>
@@ -225,6 +245,7 @@ const ListUser = () => {
                           type="text"
                           className="form-control"
                           id="inputRol"
+                          value={modalUserData?.rol.Rol_nombre|| ""}
                           disabled
                         />
                       </div>
@@ -232,10 +253,11 @@ const ListUser = () => {
                         <label htmlFor="inputEmail" className="form-label">
                           Correo
                         </label>
-                        <input
+                        <input  
                           type="text"
                           className="form-control"
                           id="inputEmail"
+                          value={modalUserData?.email || ""}
                           disabled
                         />
                       </div>

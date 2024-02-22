@@ -4,7 +4,7 @@ import API_URL from "../../../api/api";
 const FunctionList = () => {
   const [userallData, setUserallData] = useState(null);
   const [error, setError] = useState(null);
-
+  const [selectedUser, setSelectedUser] = useState(null);
   useEffect(() => {
     const fetchUserallData = async () => {
       const accessToken = localStorage.getItem("token");
@@ -33,12 +33,13 @@ const FunctionList = () => {
     fetchUserallData();
   }, []);
 
-  const openModal = (modalId) => {
+   const openModal = (modalId, user) => {
     const modal = new window.bootstrap.Modal(document.getElementById(modalId));
     modal.show();
+    setSelectedUser(user);
   };
 
-  return { userallData, openModal };
+  return { userallData, openModal, selectedUser };
 };
 
 export default FunctionList;
